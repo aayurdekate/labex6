@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1 class="text-2xl font-bold mb-4">Login Form</h1>
+            <form id="registration-form">
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" class="input-field" required>
+                    <p id="name-error" class="error-message"></p>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="input-field" required>
+                    <p id="email-error" class="error-message"></p>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" class="input-field" required>
+                    <p id="password-error" class="error-message"></p>
+                </div>
+                <div class="mb-4">
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" class="input-field" required>
+                    <p id="confirm-password-error" class="error-message"></p>
+                </div>
+                <div class="mb-4">
+                    <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" class="input-field" required>
+                    <p id="dob-error" class="error-message"></p>
+                </div>
+                <button type="submit" id="submit-button" class="submit-button">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script src="form-validation.js"></script>
+</body>
+</html>
