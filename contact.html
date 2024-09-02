@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .valid {
+            border-color: green;
+        }
+
+        .invalid {
+            border-color: red;
+        }
+
+        .valid-feedback {
+            color: green;
+        }
+
+        .invalid-feedback {
+            color: red;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <header class="bg-white shadow">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <a href="index.html" class="flex-shrink-0 flex items-center text-xl font-bold text-gray-900">
+                        Photography
+                    </a>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="index.html" class="border-b-2 border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">
+                            Home
+                        </a>
+                        <a href="about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            About
+                        </a>
+                        <a href="gallery2.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Gallery
+                        </a>
+                        <a href="services.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Services
+                        </a>
+                        <a href="contact.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="max-w-2xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-6 text-center">User Registration</h1>
+        <form id="registration-form">
+            <div class="mb-6">
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="name" name="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <p id="name-error" class="mt-2 text-sm text-red-600"></p>
+            </div>
+            <div class="mb-6">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <p id="email-error" class="mt-2 text-sm text-red-600"></p>
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <p id="password-error" class="mt-2 text-sm text-red-600"></p>
+            </div>
+            <div class="mb-6">
+                <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <p id="confirm-password-error" class="mt-2 text-sm text-red-600"></p>
+            </div>
+            <div class="mb-6">
+                <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                <input type="date" id="dob" name="dob" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <p id="dob-error" class="mt-2 text-sm text-red-600"></p>
+            </div>
+            <div class="flex justify-center">
+                <button type="submit" id="submit-button" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75" disabled>Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('registration-form');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const dobInput = document.getElementById('dob');
+        const submitButton = document.getElementById('submit-button');
+
+        function validateName() {
+            const nameValue = nameInput.value.trim();
+            const nameError = document.getElementById('name-error');
+
+            if (nameValue.length >= 3 && /^[A-Za-z\s]+$/.test(nameValue)) {
+                nameError.textContent = '';
+                nameInput.classList.add('valid');
+                nameInput.classList.remove('invalid');
+                return true;
+            } else {
+                nameError.textContent = 'Please enter a valid name (only letters and spaces, minimum 3 characters).';
+                nameInput.classList.add('invalid');
+                nameInput.classList.remove('valid');
+                return false;
+            }
+        }
+
+        function validateEmail() {
+            const emailValue = emailInput.value.trim();
+            const emailError = document.getElementById('email-error');
+
+            const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+            if (emailPattern.test(emailValue)) {
+                emailError.textContent = '';
+                emailInput.classList.add('valid');
+                emailInput.classList.remove('invalid');
+                return true;
+            } else {
+                emailError.textContent = 'Please enter a valid email address.';
+                emailInput.classList.add('invalid');
+                emailInput.classList.remove('valid');
+                return false;
+            }
+        }
+
+        function validatePassword() {
+            const passwordValue = passwordInput.value.trim();
+            const passwordError = document.getElementById('password-error');
+
+            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            if (passwordPattern.test(passwordValue)) {
+                passwordError.textContent = '';
+                passwordInput.classList.add('valid');
+                passwordInput.classList.remove('invalid');
+                return true;
+            } else {
+                passwordError.textContent = 'Password must be at least 8 characters long and contain both letters and numbers.';
+                passwordInput.classList.add('invalid');
+                passwordInput.classList.remove('valid');
+                return false;
+            }
+        }
+
+        function validateConfirmPassword() {
+            const confirmPasswordValue = confirmPasswordInput.value.trim();
+            const confirmPasswordError = document.getElementById('confirm-password-error');
+
+            if (confirmPasswordValue === passwordInput.value.trim()) {
+                confirmPasswordError.textContent = '';
+                confirmPasswordInput.classList.add('valid');
+                confirmPasswordInput.classList.remove('invalid');
+                return true;
+            } else {
+                confirmPasswordError.textContent = 'Passwords do not match.';
+                confirmPasswordInput.classList.add('invalid');
+                confirmPasswordInput.classList.remove('valid');
+                return false;
+            }
+        }
+
+        function validateDob() {
+            const dobValue = new Date(dobInput.value);
+            const dobError = document.getElementById('dob-error');
+            const currentDate = new Date();
+            const age = currentDate.getFullYear() - dobValue.getFullYear();
+
+            if (age >= 18) {
+                dobError.textContent = '';
+                dobInput.classList.add('valid');
+                dobInput.classList.remove('invalid');
+                return true;
+            } else {
+                dobError.textContent = 'You must be at least 18 years old.';
+                dobInput.classList.add('invalid');
+                dobInput.classList.remove('valid');
+                return false;
+            }
+        }
+
+        function validateForm() {
+            const isNameValid = validateName();
+            const isEmailValid = validateEmail();
+            const isPasswordValid = validatePassword();
+            const isConfirmPasswordValid = validateConfirmPassword();
+            const isDobValid = validateDob();
+
+            if (isNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid && isDobValid) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+
+        nameInput.addEventListener('input', validateForm);
+        emailInput.addEventListener('input', validateForm);
+        passwordInput.addEventListener('input', validateForm);
+        confirmPasswordInput.addEventListener('input', validateForm);
+        dobInput.addEventListener('input', validateForm);
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            validateForm();
+            if (!submitButton.disabled) {
+                alert('Form submitted successfully!');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
